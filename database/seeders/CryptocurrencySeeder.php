@@ -17,8 +17,6 @@ class CryptocurrencySeeder extends Seeder
             [
                 'symbol' => 'BTC',
                 'name' => 'Bitcoin',
-                'coinbase_id' => 'BTC-USD',
-                'icon_url' => 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png',
                 'description' => 'Bitcoin is a decentralized digital currency without a central bank or single administrator.',
                 'is_active' => true,
                 'decimals' => 8,
@@ -31,8 +29,6 @@ class CryptocurrencySeeder extends Seeder
             [
                 'symbol' => 'ETH',
                 'name' => 'Ethereum',
-                'coinbase_id' => 'ETH-USD',
-                'icon_url' => 'https://assets.coingecko.com/coins/images/279/large/ethereum.png',
                 'description' => 'Ethereum is a decentralized computing platform that runs smart contracts.',
                 'is_active' => true,
                 'decimals' => 18,
@@ -45,8 +41,6 @@ class CryptocurrencySeeder extends Seeder
             [
                 'symbol' => 'USDT',
                 'name' => 'Tether',
-                'coinbase_id' => 'USDT-USD',
-                'icon_url' => 'https://assets.coingecko.com/coins/images/325/large/Tether.png',
                 'description' => 'Tether is a cryptocurrency with a value meant to be pegged to the U.S. Dollar.',
                 'is_active' => true,
                 'decimals' => 6,
@@ -59,8 +53,6 @@ class CryptocurrencySeeder extends Seeder
             [
                 'symbol' => 'USDC',
                 'name' => 'USD Coin',
-                'coinbase_id' => 'USDC-USD',
-                'icon_url' => 'https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png',
                 'description' => 'USD Coin is a fully collateralized US dollar stablecoin.',
                 'is_active' => true,
                 'decimals' => 6,
@@ -73,8 +65,6 @@ class CryptocurrencySeeder extends Seeder
             [
                 'symbol' => 'BNB',
                 'name' => 'Binance Coin',
-                'coinbase_id' => 'BNB-USD',
-                'icon_url' => 'https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png',
                 'description' => 'Binance Coin is the native cryptocurrency of the Binance exchange.',
                 'is_active' => true,
                 'decimals' => 18,
@@ -87,8 +77,6 @@ class CryptocurrencySeeder extends Seeder
             [
                 'symbol' => 'SOL',
                 'name' => 'Solana',
-                'coinbase_id' => 'SOL-USD',
-                'icon_url' => 'https://assets.coingecko.com/coins/images/4128/large/solana.png',
                 'description' => 'Solana is a blockchain platform known for its high speed and low cost.',
                 'is_active' => true,
                 'decimals' => 9,
@@ -101,8 +89,6 @@ class CryptocurrencySeeder extends Seeder
             [
                 'symbol' => 'XRP',
                 'name' => 'Ripple',
-                'coinbase_id' => 'XRP-USD',
-                'icon_url' => 'https://assets.coingecko.com/coins/images/44/large/xrp-symbol-white-128.png',
                 'description' => 'Ripple is a technology for enabling instantaneous and low-cost international payments.',
                 'is_active' => true,
                 'decimals' => 6,
@@ -115,8 +101,6 @@ class CryptocurrencySeeder extends Seeder
             [
                 'symbol' => 'ADA',
                 'name' => 'Cardano',
-                'coinbase_id' => 'ADA-USD',
-                'icon_url' => 'https://assets.coingecko.com/coins/images/975/large/cardano.png',
                 'description' => 'Cardano is a blockchain platform for running smart contracts and decentralized applications.',
                 'is_active' => true,
                 'decimals' => 6,
@@ -129,8 +113,6 @@ class CryptocurrencySeeder extends Seeder
             [
                 'symbol' => 'DOGE',
                 'name' => 'Dogecoin',
-                'coinbase_id' => 'DOGE-USD',
-                'icon_url' => 'https://assets.coingecko.com/coins/images/5/large/dogecoin.png',
                 'description' => 'Dogecoin is a peer-to-peer digital currency based on the Doge meme.',
                 'is_active' => true,
                 'decimals' => 8,
@@ -143,8 +125,6 @@ class CryptocurrencySeeder extends Seeder
             [
                 'symbol' => 'MATIC',
                 'name' => 'Polygon',
-                'coinbase_id' => 'MATIC-USD',
-                'icon_url' => 'https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png',
                 'description' => 'Polygon is a layer 2 scaling solution for Ethereum.',
                 'is_active' => true,
                 'decimals' => 18,

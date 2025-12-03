@@ -8,8 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, TwoFactorAuthenticatable;
@@ -23,6 +24,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
+        'is_blocked',
+        'blocked_reason',
+        'blocked_at',
+        'transaction_limit_daily',
     ];
 
     /**
@@ -47,6 +53,9 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
+            'is_blocked' => 'boolean',
+            'blocked_at' => 'datetime',
         ];
     }
 
@@ -60,5 +69,86 @@ class User extends Authenticatable
             ->take(2)
             ->map(fn ($word) => Str::substr($word, 0, 1))
             ->implode('');
+    }
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'sender_id')
+            ->orWhere('receiver_id', $this->id);
+    }
+
+    public function sentTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'sender_id');
+    }
+
+    public function receivedTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'receiver_id');
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
+    public function marketOffers()
+    {
+        return $this->hasMany(MarketOffer::class);
+    }
+
+    public function boughtMarketTrades()
+    {
+        return $this->hasMany(MarketTrade::class, 'buyer_id');
+    }
+
+    public function soldMarketTrades()
+    {
+        return $this->hasMany(MarketTrade::class, 'seller_id');
+    }
+
+    public function priceAlerts()
+    {
+        return $this->hasMany(PriceAlert::class);
+    }
+
+    public function favoriteCryptocurrencies()
+    {
+        return $this->hasMany(FavoriteCryptocurrency::class);
+    }
+
+    public function approvedTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'approved_by_admin_id');
+    }
+
+    public function blockedTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'blocked_by_admin_id');
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
