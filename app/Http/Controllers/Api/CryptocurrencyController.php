@@ -52,8 +52,6 @@ class CryptocurrencyController extends Controller
                 'id' => $cryptocurrency->id,
                 'symbol' => $cryptocurrency->symbol,
                 'name' => $cryptocurrency->name,
-                'coinbase_id' => $cryptocurrency->coinbase_id,
-                'icon_url' => $cryptocurrency->icon_url,
                 'description' => $cryptocurrency->description,
                 'decimals' => $cryptocurrency->decimals,
                 'min_purchase_amount' => $cryptocurrency->min_purchase_amount,
