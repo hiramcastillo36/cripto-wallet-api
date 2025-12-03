@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Purchase extends Model
 {
     protected $fillable = [
+        'uuid',
         'user_id',
         'cryptocurrency_id',
         'amount_crypto',
@@ -21,11 +23,23 @@ class Purchase extends Model
         'metadata',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->uuid)) {
+                $model->uuid = Str::uuid();
+            }
+        });
+    }
+
     protected function casts(): array
     {
         return [
             'completed_at' => 'datetime',
             'metadata' => 'json',
+            'uuid' => 'string',
         ];
     }
 
