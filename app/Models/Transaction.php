@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Transaction extends Model
 {
     protected $fillable = [
+        'uuid',
         'type',
         'sender_id',
         'receiver_id',
@@ -26,6 +28,17 @@ class Transaction extends Model
         'reference_id',
         'metadata',
     ];
+
+    protected static function booting(): void
+    {
+        parent::booting();
+
+        static::creating(function ($model) {
+            if (!$model->uuid) {
+                $model->uuid = Str::uuid();
+            }
+        });
+    }
 
     protected function casts(): array
     {
