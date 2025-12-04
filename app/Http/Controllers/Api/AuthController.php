@@ -46,6 +46,8 @@ class AuthController extends Controller
                         'id' => $user->id,
                         'name' => $user->name,
                         'email' => $user->email,
+                        'is_admin' => $user->is_admin,
+                        'is_blocked' => $user->is_blocked,
                     ],
                     'token' => $token,
                     'token_type' => 'Bearer',
@@ -96,6 +98,8 @@ class AuthController extends Controller
                         'id' => $user->id,
                         'name' => $user->name,
                         'email' => $user->email,
+                        'is_admin' => $user->is_admin,
+                        'is_blocked' => $user->is_blocked,
                     ],
                     'token' => $token,
                     'token_type' => 'Bearer',
@@ -184,9 +188,60 @@ class AuthController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
+                    'is_admin' => $user->is_admin,
+                    'is_blocked' => $user->is_blocked,
                 ],
             ],
         ], 200);
+    }
+
+    /**
+     * Validate token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function validateToken()
+    {
+        try {
+            $user = auth('api')->user();
+
+            if (!$user) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Token is invalid or expired',
+                    'valid' => false,
+                ], 401);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Token is valid',
+                'valid' => true,
+                'data' => [
+                    'user' => [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'is_admin' => $user->is_admin,
+                        'is_blocked' => $user->is_blocked,
+                    ],
+                ],
+            ], 200);
+        } catch (JWTException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Token validation failed',
+                'valid' => false,
+                'error' => $e->getMessage(),
+            ], 401);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred',
+                'valid' => false,
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**

@@ -9,7 +9,6 @@ class Cryptocurrency extends Model
     protected $fillable = [
         'symbol',
         'name',
-        'coinbase_id',
         'icon_url',
         'description',
         'is_active',
